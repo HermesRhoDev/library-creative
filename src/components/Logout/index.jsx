@@ -6,6 +6,7 @@ export const Logout = () => {
 
   const handleLogout = () => {
     updateToken(false);
+    console.clear();
     localStorage.clear();
   };
 

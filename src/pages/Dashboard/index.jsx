@@ -7,6 +7,8 @@ import { UserContext } from "../../context/authContext";
 export const Dashboard = () => {
   const { currentUser } = useContext(UserContext);
   const [books, setBooks] = useState(null);
+  const [search, setSearch] = useState(null);
+  const [library, setLibrary] = useState(null);
 
   const navigate = useNavigate();
 
@@ -26,6 +28,26 @@ export const Dashboard = () => {
     }
   };
 
+  const addBookToLibrary = (id, title, image) => {
+    let libraryExist = JSON.parse(localStorage.getItem("myLibrary"));
+    if (libraryExist == null) libraryExist = [];
+    let entry = {
+      id: id,
+      title: title,
+      image: image,
+    };
+    if (libraryExist) {
+      const bookExist = libraryExist.find((book) => book["id"] === id);
+      if (bookExist) {
+        alert("Livre déjà ajouté !");
+      } else {
+        libraryExist.push(entry);
+        localStorage.setItem("myLibrary", JSON.stringify(libraryExist));
+        setLibrary(libraryExist);
+      }
+    }
+  };
+
   useEffect(() => {
     if (!currentUser) {
       navigate("/");
@@ -34,46 +56,66 @@ export const Dashboard = () => {
     getBooks();
   }, [currentUser]);
 
-  if(books){
-   console.log(books[0])
+  if (books) {
+    console.log(books[0]);
   }
 
   return (
     <>
       {currentUser ? (
         <div className="w-full h-full flex flex-row">
-          <div className="bg-black h-full w-1/5 p-5 flex flex-col">
+          <div className="bg-black h-full w-1/5 p-5 flex flex-col gap-10">
             <h1 className="text-white text-center font-bold uppercase flex flex-row justify-evenly items-center">
               <span className="rounded-full bg-white w-5 h-2 block"></span>
               My Library
               <span className="rounded-full bg-white w-5 h-2 block"></span>
             </h1>
-            <nav className="flex flex-col items-center mt-auto">
+            <nav className="flex flex-col items-center justify-between h-full">
+              <li>
+                <input
+                  className="p-2"
+                  type="text"
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Rechercher"
+                />
+              </li>
               <li>
                 <Logout />
               </li>
             </nav>
           </div>
-          <div className="bg-blue-400 w-4/5 h-full overflow-y-auto">
-            {
-               books ? books.map((book) => {
-                  let id = book['id'];
-                  let title = book['volumeInfo']['title'];
-                  let pageCount =  book['volumeInfo']['pageCount'];
-                  let authors = book['volumeInfo']['authors'];
-                  let thumbnail = book['volumeInfo']['imageLinks']['thumbnail'];
+          <div className="w-4/5 h-full overflow-y-auto flex flex-wrap items-center justify-center gap-5 p-5">
+            {books
+              ? books
+                  .filter((book) => {
+                    if (!search) return book;
+                    else if (
+                      book["volumeInfo"]["title"]
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    )
+                      return book;
+                  })
+                  .map((book) => {
+                    let id = book["id"];
+                    let title = book["volumeInfo"]["title"];
+                    // let pageCount =  book['volumeInfo']['pageCount'];
+                    // let authors = book['volumeInfo']['authors'];
+                    let thumbnail =
+                      book["volumeInfo"]["imageLinks"]["thumbnail"];
 
-                  return (
-                     <div key={id}>
-                        <h1>{title}</h1>
-                        <h2>{pageCount}</h2>
-                        <h3>{authors}</h3>
+                    return (
+                      <div
+                        onClick={() => addBookToLibrary(id, title, thumbnail)}
+                        key={id}
+                        className="w-1/4 flex flex-col items-center border border-black h-fit"
+                      >
                         <img src={thumbnail} alt="" />
-                        <br />
-                     </div>
-                  )
-               }) : ''
-            }
+                        <p className="break-words p-3 text-center">{title}</p>
+                      </div>
+                    );
+                  })
+              : ""}
           </div>
         </div>
       ) : (
