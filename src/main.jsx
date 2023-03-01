@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Error404 } from './pages/Error404'
 import { Signin } from './pages/Signin'
 import { Dashboard } from './pages/Dashboard'
+import { Library } from './pages/Library'
 // CONTEXT \\
 import AuthContextProvider from './context/authContext'
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Dashboard />,
+  },
+  {
+    path: '/library',
+    element: <Library />,
   }
 ])
 
