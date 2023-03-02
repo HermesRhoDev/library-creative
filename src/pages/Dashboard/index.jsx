@@ -115,14 +115,17 @@ export const Dashboard = () => {
 
                     return (
                       <div
-                        onClick={() => addBookToLibrary(id, title, thumbnail)}
                         key={id}
                         className="w-1/4 flex flex-col items-center border border-black h-fit"
                       >
-                        <Link to={"/dashboard/book/" + id}>
-                          <img src={thumbnail} alt="" />
-                        </Link>
+                        <img src={thumbnail} alt="" />
                         <p className="break-words p-3 text-center">{title}</p>
+                        <Link to={"/dashboard/book/" + id}>Voir</Link>
+                        <button
+                          onClick={() => addBookToLibrary(id, title, thumbnail)}
+                        >
+                          Ajouter
+                        </button>
                       </div>
                     );
                   })

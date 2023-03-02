@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthContextProvider from "./context/authContext";
 import { Book } from "./pages/Book";
+import { LibraryBook } from "./pages/LibraryBook";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/library",
     element: <Library />,
+  },
+  {
+    path: "/library/book/:id",
+    element: <LibraryBook />,
   },
 ]);
 
