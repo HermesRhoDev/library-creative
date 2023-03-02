@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Logout } from "../../components/Logout";
 import { UserContext } from "../../context/authContext";
+import { toastConfig } from "../../utils/ToastConfig/toastConfig";
 
 export const Dashboard = () => {
   const { currentUser } = useContext(UserContext);
@@ -39,11 +41,12 @@ export const Dashboard = () => {
     if (libraryExist) {
       const bookExist = libraryExist.find((book) => book["id"] === id);
       if (bookExist) {
-        alert("Livre déjà ajouté !");
+        toast.error("Livre déjà ajouté !", { toastConfig });
       } else {
         libraryExist.push(entry);
         localStorage.setItem("myLibrary", JSON.stringify(libraryExist));
         setLibrary(libraryExist);
+        toast.success("Ajout effectué !", { toastConfig });
       }
     }
   };
@@ -80,6 +83,14 @@ export const Dashboard = () => {
                 />
               </li>
               <li>
+                <Link
+                  to="/library"
+                  className="text-black uppercase font-bold px-5 py-2 bg-white"
+                >
+                  Ma Collection
+                </Link>
+              </li>
+              <li>
                 <Logout />
               </li>
             </nav>
@@ -99,8 +110,6 @@ export const Dashboard = () => {
                   .map((book) => {
                     let id = book["id"];
                     let title = book["volumeInfo"]["title"];
-                    // let pageCount =  book['volumeInfo']['pageCount'];
-                    // let authors = book['volumeInfo']['authors'];
                     let thumbnail =
                       book["volumeInfo"]["imageLinks"]["thumbnail"];
 
@@ -110,7 +119,9 @@ export const Dashboard = () => {
                         key={id}
                         className="w-1/4 flex flex-col items-center border border-black h-fit"
                       >
-                        <img src={thumbnail} alt="" />
+                        <Link to={"/dashboard/book/" + id}>
+                          <img src={thumbnail} alt="" />
+                        </Link>
                         <p className="break-words p-3 text-center">{title}</p>
                       </div>
                     );

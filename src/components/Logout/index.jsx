@@ -10,5 +10,12 @@ export const Logout = () => {
     localStorage.clear();
   };
 
-  return <button onClick={handleLogout} className="text-black uppercase font-bold px-5 py-2 bg-white">Déconnexion</button>;
+  return (
+    <button
+      onClick={handleLogout}
+      className="text-black uppercase font-bold px-5 py-2 bg-white"
+    >
+      Déconnexion
+    </button>
+  );
 };

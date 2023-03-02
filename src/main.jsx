@@ -1,39 +1,58 @@
 // REACT IMPORT \\
-import React from 'react'
+import React from "react";
 // CSS IMPORT \\
-import './assets/styles/css/global.css'
-import './assets/styles/css/index.css'
-import ReactDOM from 'react-dom/client'
+import ReactDOM from "react-dom/client";
+import "./assets/styles/css/global.css";
+import "./assets/styles/css/index.css";
 // ROUTER IMPORT \\
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // PAGES \\
-import { Error404 } from './pages/Error404'
-import { Signin } from './pages/Signin'
-import { Dashboard } from './pages/Dashboard'
-import { Library } from './pages/Library'
+import { Dashboard } from "./pages/Dashboard";
+import { Error404 } from "./pages/Error404";
+import { Library } from "./pages/Library";
+import { Signin } from "./pages/Signin";
 // CONTEXT \\
-import AuthContextProvider from './context/authContext'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AuthContextProvider from "./context/authContext";
+import { Book } from "./pages/Book";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Signin />,
     errorElement: <Error404 />,
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <Dashboard />,
   },
   {
-    path: '/library',
+    path: "/dashboard/book/:id",
+    element: <Book />,
+  },
+  {
+    path: "/library",
     element: <Library />,
-  }
-])
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <AuthContextProvider>
-        <RouterProvider router={router} />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      <RouterProvider router={router} />
     </AuthContextProvider>
   </>
-)
+);
