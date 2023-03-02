@@ -17,20 +17,39 @@ export const Library = () => {
 
   return (
     <>
-      {currentLibrary.length != 0
-        ? currentLibrary.map((current) => {
-            return (
-              <div key={current.id} className="bg-black text-white m-5 p-3">
-                <h1>Titre du livre: {current.title}</h1>
-                <Link to={"/library/book/" + current.id}>Voir</Link>
-                <br />
-                <button onClick={() => handleDeleteClick(current.id)}>
-                  Supprimer
-                </button>
-              </div>
-            );
-          })
-        : "Aucun livre dans votre collection !"}
+      <div className="w-full h-full p-5 flex flex-col gap-10">
+        {!currentLibrary
+          ? "Aucun livre dans votre collection !"
+          : currentLibrary.length != 0
+          ? currentLibrary.map((current) => {
+              return (
+                <div
+                  key={current.id}
+                  className="bg-black text-white p-3 flex flex-col gap-5"
+                >
+                  <h1>
+                    <b>Titre du livre:</b> {current.title}
+                  </h1>
+                  <div className="flex flex-row gap-3">
+                    <Link
+                      to={"/library/book/" + current.id}
+                      className="bg-white text-black font-bold px-5 py-2"
+                    >
+                      Voir
+                    </Link>
+                    <button
+                      onClick={() => handleDeleteClick(current.id)}
+                      className="bg-white text-black font-bold px-5 py-2"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                  <img src={current.image} alt="" />
+                </div>
+              );
+            })
+          : "Aucun livre dans votre collection !"}
+      </div>
     </>
   );
 };
