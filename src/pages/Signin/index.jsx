@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UserContext } from "../../context/authContext";
 import { SignInSchemaValidation } from "../../utils/schema/validations/signinValidation";
+import { TabTitle } from "../../utils/tabtitle";
 import { toastConfig } from "../../utils/ToastConfig/toastConfig";
 
 export const Signin = () => {
+  TabTitle("Connexion - Library Creative");
+
   const { updateToken, currentUser } = useContext(UserContext);
 
   const navigate = useNavigate();

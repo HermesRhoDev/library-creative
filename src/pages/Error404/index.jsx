@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
+import { TabTitle } from "../../utils/tabtitle";
 
 export const Error404 = () => {
+   TabTitle("Erreur 404 - Library Creative");
+
    return (
       <>
          <div className="w-full h-screen bg-black flex justify-center items-center flex-col gap-10">

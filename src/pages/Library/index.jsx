@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { GoBack } from "../../components/GoBack";
 import { toastConfig } from "../../utils/ToastConfig/toastConfig";
+import { TabTitle } from "../../utils/tabtitle";
 
 export const Library = () => {
+  TabTitle("Ma Collection - Library Creative");
+
   let [currentLibrary, setCurrentLibrary] = useState(
     JSON.parse(localStorage.getItem("myLibrary"))
   );

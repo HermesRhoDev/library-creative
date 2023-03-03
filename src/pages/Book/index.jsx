@@ -3,8 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Logout } from "../../components/Logout";
 import { UserContext } from "../../context/authContext";
+import { TabTitle } from "../../utils/tabtitle";
 
 export const Book = () => {
+  TabTitle("Consultation - Library Creative");
+
   let { id } = useParams();
   const [book, setBook] = useState(null);
   const { currentUser } = useContext(UserContext);
