@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { GoBack } from "../../components/GoBack";
 import { toastConfig } from "../../utils/ToastConfig/toastConfig";
 
 export const Library = () => {
@@ -15,10 +16,6 @@ export const Library = () => {
     toast.success("Suppression effectué !", { toastConfig });
   };
 
-  const goBack = () => {
-    window.history.back();
-  };
-
   return (
     <>
       <div className="w-full min-h-full p-5 flex flex-col gap-10">
@@ -26,12 +23,7 @@ export const Library = () => {
           <h1 className="text-center font-bold text-2xl uppercase flex-1">
             MA COLLECTION
           </h1>
-          <button
-            onClick={goBack}
-            className="bg-black text-white font-bold px-5 py-2"
-          >
-            Retour
-          </button>
+          <GoBack />
         </div>
         {!currentLibrary
           ? "Aucun livre dans votre collection !"
