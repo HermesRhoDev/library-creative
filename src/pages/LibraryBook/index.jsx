@@ -1,6 +1,8 @@
 import { Field, Form, Formik } from "formik";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { GoBack } from "../../components/GoBack";
 
 export const LibraryBook = () => {
   let { id } = useParams();
@@ -52,6 +54,7 @@ export const LibraryBook = () => {
           </div>
         </div>
         <div className="w-1/2 h-full flex flex-col justify-center items-center gap-20">
+          <GoBack />
           <h1 className="uppercase font-bold text-black text-4xl">
             MON RéSUMé
           </h1>
@@ -63,7 +66,7 @@ export const LibraryBook = () => {
               validationSchema={null}
               onSubmit={(value) => {
                 add(value.summary);
-                window.location.reload();
+                window.location.reload(false);
               }}
             >
               {({ errors, touched }) => (
