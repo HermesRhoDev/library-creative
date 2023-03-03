@@ -30,12 +30,13 @@ export const Dashboard = () => {
     }
   };
 
-  const addBookToLibrary = (id, title, image) => {
+  const addBookToLibrary = (id, title, image, subtitle) => {
     let libraryExist = JSON.parse(localStorage.getItem("myLibrary"));
     if (libraryExist == null) libraryExist = [];
     let entry = {
       id: id,
       title: title,
+      subtitle: subtitle,
       image: image,
     };
     if (libraryExist) {
@@ -58,10 +59,6 @@ export const Dashboard = () => {
 
     getBooks();
   }, [currentUser]);
-
-  if (books) {
-    console.log(books[0]);
-  }
 
   return (
     <>
@@ -112,6 +109,7 @@ export const Dashboard = () => {
                     let title = book["volumeInfo"]["title"];
                     let thumbnail =
                       book["volumeInfo"]["imageLinks"]["thumbnail"];
+                    let subtitle = book["volumeInfo"]["subtitle"];
 
                     return (
                       <div
@@ -122,7 +120,9 @@ export const Dashboard = () => {
                         <p className="break-words p-3 text-center">{title}</p>
                         <Link to={"/dashboard/book/" + id}>Voir</Link>
                         <button
-                          onClick={() => addBookToLibrary(id, title, thumbnail)}
+                          onClick={() =>
+                            addBookToLibrary(id, title, thumbnail, subtitle)
+                          }
                         >
                           Ajouter
                         </button>
