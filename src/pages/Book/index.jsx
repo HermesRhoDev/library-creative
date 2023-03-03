@@ -14,7 +14,6 @@ export const Book = () => {
           },
         }
       );
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

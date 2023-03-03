@@ -38,6 +38,7 @@ export const Dashboard = () => {
       title: title,
       subtitle: subtitle,
       image: image,
+      summary: null,
     };
     if (libraryExist) {
       const bookExist = libraryExist.find((book) => book["id"] === id);
