@@ -30,7 +30,6 @@ export const Signin = () => {
           }}
           validationSchema={SignInSchemaValidation}
           onSubmit={(values) => {
-            console.log(values);
             updateToken("jdjdjdjdjdjdj");
             toast.success("Vous êtes bien connecté !", { toastConfig });
           }}
