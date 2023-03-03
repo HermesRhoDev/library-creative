@@ -25,6 +25,8 @@ export const LibraryBook = () => {
     booksListCopy[index] = bookCopy;
 
     localStorage.setItem("myLibrary", JSON.stringify(booksListCopy));
+
+    setBooks(JSON.parse(localStorage.getItem("myLibrary")));
   };
 
   return (
@@ -66,7 +68,6 @@ export const LibraryBook = () => {
               validationSchema={null}
               onSubmit={(value) => {
                 add(value.summary);
-                window.location.reload(false);
               }}
             >
               {({ errors, touched }) => (
