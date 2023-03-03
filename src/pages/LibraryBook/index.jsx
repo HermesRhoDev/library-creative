@@ -1,10 +1,12 @@
 import { Field, Form, Formik } from "formik";
-import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { GoBack } from "../../components/GoBack";
+import { TabTitle } from "../../utils/tabtitle";
 
 export const LibraryBook = () => {
+  TabTitle("Mon Livre - Library Creative");
+
   let { id } = useParams();
 
   const [books, setBooks] = useState(

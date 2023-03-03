@@ -5,8 +5,11 @@ import { toast } from "react-toastify";
 import { Logout } from "../../components/Logout";
 import { UserContext } from "../../context/authContext";
 import { toastConfig } from "../../utils/ToastConfig/toastConfig";
+import { TabTitle } from "../../utils/tabtitle";
 
 export const Dashboard = () => {
+  TabTitle("Dashboard - Library Creative");
+
   const { currentUser } = useContext(UserContext);
   const [books, setBooks] = useState(null);
   const [search, setSearch] = useState(null);
